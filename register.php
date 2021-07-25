@@ -29,16 +29,7 @@
             }else if(g.test(f)==false){
                 document.getElementById("i_5").style.visibility = "visible";
                 return false;
-            }else{
-                validate()
-                function validate(){
-                    if (confirm("Press a button!")){
-                        location.hash;
-                    }else{
-                        txt = "You pressed cancel!"
-                        return false
             }
-            document.getElementById("demo").innerHTML = txt;
         }
         
             }

@@ -3,30 +3,29 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html>
-<div >  
-<?php
-require("header.html");
-?>
-</div>
+    <html>
+        <div>  
+            <?php
+                require("header.html");
+            ?>
+        </div>
 
-<div class="nested">
-<?php
+        <div class="nested">
 
-// Include all Project data here 
+            <?php
 
-echo "";
-echo '<h1 align = "center">'.'START OUT '." ".$_SESSION["username"].'!'.'</h1>';
-echo "<div class = 'main'>";
-include('expenditure.php');
-echo "</div>";
+                echo "";
+                echo '<h1 align = "center">'.'START OUT '." ".$_SESSION["username"].'!'.'</h1>';
+                echo "<div class = 'main'>";
+                include('expenditure.php');
+                echo "</div>";
 
-?>
-</div>
+            ?>
+        </div>
 
-<div>
-<?php
-include("footer.html")
-?>
-</div>
-</html>
+        <div>
+            <?php
+                include("footer.html")
+            ?>
+        </div>
+    </html>

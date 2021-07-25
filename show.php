@@ -23,19 +23,6 @@
     
     </tr>
 
-        
-        
-   <!-- <tr>
-     <th>Product</th>
-     <th>Quantity</th>
-     <th>Price</th>
-  </tr>
-      <tr>
-         <td><input type="text" name="product" value="product.."></input></td>
-        <td><input type="number" name="quantity" value="quanty.."></input></td>
-        <td><input type="number" name="price" value="price.."></input></td>
-      </tr> -->
-
  </table>
  </center>
 </form>
@@ -92,16 +79,6 @@
 });
 
      });
-    //  $(document).ready(function(){
-
-    //    $("button").on("click", function(){
-
-    //      var row1 = '<td>Date:</td><td><input type="date" name="date" value="date"></td>'
-    //      $("#option").append(row1);
-
-    //    });
-
-    //  });
 
     </script>
 

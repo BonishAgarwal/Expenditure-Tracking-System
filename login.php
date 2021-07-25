@@ -1,22 +1,33 @@
 <?php
 if(isset($_POST["submit"])){
+  
     session_start();
+
     $_SESSION["username"] = $_POST["Username"];
     $password = $_POST["Pass"];
-    $connection = mysqli_connect("localhost","root","","project");
-    $query = "select * from registration where username = '".$_SESSION["username"]."' && password = '".$password."'";
-    $result = mysqli_query($connection,$query) or die("not working");
-    $ans = mysqli_num_rows($result);
-    if($ans!=0){
-        // header("Location :home.php");
-        // echo "<script> window.location = 'expenditure.php'; </script>";
-        // echo "<script> window.location = 'show.php'; </script>";
-        // echo "<script> window.location = 'realone.html'; </script>";
+
+    include('connection.php');
+
+    $query1 = "select * from registration where username = '".$_SESSION["username"]."'";
+    $result1 = mysqli_query($connection,$query1) or die("not working");
+
+    $data = mysqli_fetch_assoc($result1);
+
+
+    $ans = mysqli_num_rows($result1);
+    
+    if($ans!=0)
+    {
+      if(password_verify($password, $data["password"]))
+      {
         echo "<script> window.location = 'theme.php'; </script>";
-    }else{
-        // header("Location : login.php");
-        // echo "<script> window.location = 'login.php'; </script>";
+    
+      }
+    }
+    else
+    {
         echo "<script> alert('wrong input username or password'); </script>";
+        header("Location : login.php");
     }
     
 }
@@ -25,7 +36,7 @@ if(isset($_POST["submit"])){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>َAnimated Login Form</title>
+    <title>Login Form</title>
     <link rel="stylesheet" href="login.css">
   </head>
   <body>
@@ -35,7 +46,7 @@ if(isset($_POST["submit"])){
   <input type="text" name="Username" placeholder="Username">
   <input type="password" name="Pass" placeholder="Password">
   <input type="submit" name="submit" value="Login"><p><b>Not a user ?</b> <a href = "register.php">Register here</a></p>
-  <p><a href = "mailforget (1).html">Forgot Password ?</a><p>
+  <p><a href = "e_mail (1).php">Forgot Password ?</a><p>
 </form>
 
 

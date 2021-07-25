@@ -15,7 +15,7 @@ try {
     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'bonishgarg@gmail.com';                                    // SMTP username
-    $mail->Password = '9079165793';                                    // SMTP password
+    $mail->Password = 'bonish@2637';                                    // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 
@@ -33,7 +33,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'New Test Mail';
+    $mail->Subject = 'User Tracking System OTP';
     $gen = rand(1000,10000); //generating random otp's
     $_SESSION["otp3"] = $gen; //creating session for otp
     $mail->Body    = 'Your one time password is :'.$_SESSION["otp3"];

@@ -4,136 +4,177 @@
 <html>
 <div>  
 <?php
-require("header.html")
+    require("header.html")
 ?>
 </div>
 
 <div class="nested">
 <?php
-session_start();
-$conn = mysqli_connect("localhost","root","","project") or die("not working");
-if(isset($_POST["tdate"])){
-$date = $_POST["date"];
-$category = $_POST["category"];
-$sql = "select * from category where category = '".$category."' && date = '$date'";
-$result = mysqli_query($conn,$sql);
-echo "<table border = '1'>";
-echo "<tr><th>Username</th><th>Date</th><th>Category</th><th>Price</th></tr>";
-while($ans = mysqli_fetch_array($result)){
-    echo "<tr>";
-    echo '<td>'.$ans['username'].'</td>';
-    echo '<td>'.$ans['date'].'</td>';
-    echo '<td>'.$ans['category'].'</td>';
-    echo '<td>'.$ans['price'].'</td>';   
-}
-}
-if(isset($_POST["tmonth"])){ 
-    $month = $_POST["month"];
-    if($month == "select_month"){
-        header('Location:show.php');
-    }
-    $category = $_POST["category"];
-    $user = $_SESSION["username"];
-    $month_table = array("January"=>"1","Feburary"=>"2","March"=>"3","April"=>"4","May"=>"5","June"=>"6","July"=>"7","August"=>"8","September"=>"9","October"=>"10","November"=>"11","December"=>"12");
-    if($category != 'select'){
-        $sql = "select * from category where username = '".$user."' && category = '".$category."'";
-        $result = mysqli_query($conn,$sql);
-        $total = 0;
-        while($ans1 = mysqli_fetch_assoc($result)){   //printing the total price
-            if($ans1["date"][5]=="0"){
-                if($ans1["date"][6]==$month_table[$month]){
-                    $total = $total + $ans1['price'];
-                    
-                }
-            }else{
-                $a1 = $ans1["date"][5].$ans1["date"][6];
-                if($a1==$month_table[$month]){
-                    $total = $total + $ans1['price'];
-                }
-            }
+    session_start();
+    
+    include('connection.php');
+    
+    if(isset($_POST["tdate"]))
+    {
+        $user = $_SESSION["username"];
+        $date = $_POST["date"];
 
-        }
-        echo "The total expenditure is : ",$total;
-        $sql = "select * from category where username = '".$user."' && category = '".$category."'";
-        $result = mysqli_query($conn,$sql);
+        $category = $_POST["category"];
+
+        $sql = "select * from category where username = '".$user."' AND date = '".$date."'";
+        $result = mysqli_query($connection,$sql);
+
         echo "<table border = '1'>";
         echo "<tr><th>Username</th><th>Date</th><th>Category</th><th>Price</th></tr>";
-        while($ans = mysqli_fetch_assoc($result)){
-            if($ans["date"][5]=="0"){
-                if($ans["date"][6]==$month_table[$month]){
-                    
-                    echo "<tr>";
-                    echo '<td>'.$ans['username'].'</td>';
-                    echo '<td>'.$ans['date'].'</td>';
-                    echo '<td>'.$ans['category'].'</td>';
-                    echo '<td>'.$ans['price'].'</td>';
-                    echo "</tr>";
-                    
-                }
-            }else{
-                $a = $ans["date"][5].$ans["date"][6];
-                if($a==$month_table[$month]){
-                    echo "<tr>";
-                    echo '<td>'.$ans['username'].'</td>';
-                    echo '<td>'.$ans['date'].'</td>';
-                    echo '<td>'.$ans['category'].'</td>';
-                    echo '<td>'.$ans['price'].'</td>';
-                    echo "</tr>";
-                }
-            }
 
+        while($ans = mysqli_fetch_array($result))
+        {
+            echo "<tr>";
+            echo '<td>'.$ans['username'].'</td>';
+            echo '<td>'.$ans['date'].'</td>';
+            echo '<td>'.$ans['category'].'</td>';
+            echo '<td>'.$ans['price'].'</td>';   
         }
+    }
+    if(isset($_POST["tmonth"]))
+    { 
+        $month = $_POST["month"];
+
+        if($month == "select_month")
+        {
+            header('Location:show.php');
+        }
+
+        $category = $_POST["category"];
+        $user = $_SESSION["username"];
+        $month_table = array("January"=>"1","Feburary"=>"2","March"=>"3","April"=>"4","May"=>"5","June"=>"6","July"=>"7","August"=>"8","September"=>"9","October"=>"10","November"=>"11","December"=>"12");
         
-    }else{
-        $sql = "select * from category where username = '".$user."'";
-        $result = mysqli_query($conn,$sql);
-        $total = 0;
-        while($ans1 = mysqli_fetch_assoc($result)){   //printing the total price
-            if($ans1["date"][5]=="0"){
-                if($ans1["date"][6]==$month_table[$month]){
-                    $total = $total + $ans1['price'];
-                    
-                }
-            }else{
-                $a1 = $ans1["date"][5].$ans1["date"][6];
-                if($a1==$month_table[$month]){
-                    $total = $total + $ans1['price'];
-                }
-            }
+        if($category != 'select')
+        {
+            $sql = "select * from category where username = '".$user."' && category = '".$category."'";
+            $result = mysqli_query($connection,$sql);
+            $total = 0;
 
+            while($ans1 = mysqli_fetch_assoc($result)) //printing the total price
+            {   
+                if($ans1["date"][5]=="0")
+                {
+                    if($ans1["date"][6]==$month_table[$month])
+                    {
+                        $total = $total + $ans1['price'];
+                        
+                    }
+                }
+                else
+                {
+                    $a1 = $ans1["date"][5].$ans1["date"][6];
+                    if($a1==$month_table[$month])
+                    {
+                        $total = $total + $ans1['price'];
+                    }
+                }
+
+            }
+            echo "The total expenditure is : ",$total;
+
+            $sql = "select * from category where username = '".$user."' && category = '".$category."'";
+            $result = mysqli_query($connection,$sql);
+            
+            echo "<table border = '1'>";
+            echo "<tr><th>Username</th><th>Date</th><th>Category</th><th>Price</th></tr>";
+
+            while($ans = mysqli_fetch_assoc($result))
+            {
+                if($ans["date"][5]=="0")
+                {
+                    if($ans["date"][6]==$month_table[$month])
+                    {
+                        
+                        echo "<tr>";
+                        echo '<td>'.$ans['username'].'</td>';
+                        echo '<td>'.$ans['date'].'</td>';
+                        echo '<td>'.$ans['category'].'</td>';
+                        echo '<td>'.$ans['price'].'</td>';
+                        echo "</tr>";
+                        
+                    }
+                }
+                else
+                {
+                    $a = $ans["date"][5].$ans["date"][6];
+                    if($a==$month_table[$month]){
+                        echo "<tr>";
+                        echo '<td>'.$ans['username'].'</td>';
+                        echo '<td>'.$ans['date'].'</td>';
+                        echo '<td>'.$ans['category'].'</td>';
+                        echo '<td>'.$ans['price'].'</td>';
+                        echo "</tr>";
+                    }
+                }
+
+            }
+            
         }
-        echo "The total expenditure is : ",$total;
+        else
+        {
+            $sql = "select * from category where username = '".$user."'";
+            $result = mysqli_query($connection,$sql);
+            $total = 0;
 
-        $sql = "select * from category where username = '".$user."'";
-        $result = mysqli_query($conn,$sql);
-        echo "<table border = '1'>";
-        echo "<tr><th>Username</th><th>Date</th><th>Category</th><th>Price</th></tr>";
-        while($ans = mysqli_fetch_assoc($result)){
-            if($ans["date"][5]=="0"){
-                if($ans["date"][6]==$month_table[$month]){
-                    echo "<tr>";
-                    echo '<td>'.$ans['username'].'</td>';
-                    echo '<td>'.$ans['date'].'</td>';
-                    echo '<td>'.$ans['category'].'</td>';
-                    echo '<td>'.$ans['price'].'</td>';
-                    echo "</tr>";
+            while($ans1 = mysqli_fetch_assoc($result))//printing the total price
+            {   
+                if($ans1["date"][5]=="0")
+                {
+                    if($ans1["date"][6]==$month_table[$month])
+                    {
+                        $total = $total + $ans1['price'];
+                        
+                    }
                 }
-            }else{
-                $a = $ans["date"][5].$ans["date"][6];
-                if($a==$month_table[$month]){
-                    echo "<tr>";
-                    echo '<td>'.$ans['username'].'</td>';
-                    echo '<td>'.$ans['date'].'</td>';
-                    echo '<td>'.$ans['category'].'</td>';
-                    echo '<td>'.$ans['price'].'</td>';
-                    echo "</tr>";
+                else
+                {
+                    $a1 = $ans1["date"][5].$ans1["date"][6];
+                    if($a1==$month_table[$month])
+                    {
+                        $total = $total + $ans1['price'];
+                    }
                 }
+
             }
+            echo "The total expenditure is : ",$total;
 
-                
-                
+            $sql = "select * from category where username = '".$user."'";
+            $result = mysqli_query($connection,$sql);
+            echo "<table border = '1'>";
+            echo "<tr><th>Username</th><th>Date</th><th>Category</th><th>Price</th></tr>";
+            while($ans = mysqli_fetch_assoc($result))
+            {
+                if($ans["date"][5]=="0")
+                {
+                    if($ans["date"][6]==$month_table[$month])
+                    {
+                        echo "<tr>";
+                        echo '<td>'.$ans['username'].'</td>';
+                        echo '<td>'.$ans['date'].'</td>';
+                        echo '<td>'.$ans['category'].'</td>';
+                        echo '<td>'.$ans['price'].'</td>';
+                        echo "</tr>";
+                    }
+                }
+                else
+                {
+                    $a = $ans["date"][5].$ans["date"][6];
+                    if($a==$month_table[$month]){
+                        echo "<tr>";
+                        echo '<td>'.$ans['username'].'</td>';
+                        echo '<td>'.$ans['date'].'</td>';
+                        echo '<td>'.$ans['category'].'</td>';
+                        echo '<td>'.$ans['price'].'</td>';
+                        echo "</tr>";
+                    }
+                }     
+            }
         }
     }
-}
 
 ?>
