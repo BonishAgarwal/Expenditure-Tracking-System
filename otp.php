@@ -2,7 +2,17 @@
 session_start();
 
 
-if(isset($_POST["button"])){
+if(isset($_POST["button"]))
+{
+    include('connection.php');
+    $user = $_SESSION["username"];
+
+    $email = $_SESSION["email"];
+
+    $password = $_SESSION["pass"];
+    $password = password_hash($password, PASSWORD_DEFAULT);  
+    $number = $_SESSION["contact"];
+
     $otp = $_POST["otp2"];
     $otp = (int)$otp;
     
@@ -10,6 +20,9 @@ if(isset($_POST["button"])){
 
     if($otp==$otp1)
     {
+        $query = "insert into registration values('".$user."','".$email."','".$password."','".$number."')";
+        $result = mysqli_query($connection,$query) or die("Not working");   
+
         header('Location:login.php');
         session_destroy();
     }

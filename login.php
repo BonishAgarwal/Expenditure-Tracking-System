@@ -20,7 +20,7 @@ if(isset($_POST["submit"])){
     {
       if(password_verify($password, $data["password"]))
       {
-        echo "<script> window.location = 'theme.php'; </script>";
+        echo "<script> window.location = 'userDataTracking.php'; </script>";
     
       }
     }
@@ -41,13 +41,13 @@ if(isset($_POST["submit"])){
   </head>
   <body>
 
-<form autocomplete = "off" class="box" action="login.php" method="post">
-  <h1>Login</h1>
-  <input type="text" name="Username" placeholder="Username">
-  <input type="password" name="Pass" placeholder="Password">
-  <input type="submit" name="submit" value="Login"><p><b>Not a user ?</b> <a href = "register.php">Register here</a></p>
-  <p><a href = "e_mail (1).php">Forgot Password ?</a><p>
-</form>
+    <form autocomplete = "off" class="box" action="login.php" method="post">
+      <h1>Login</h1>
+      <input type="text" name="Username" placeholder="Username">
+      <input type="password" name="Pass" placeholder="Password">
+      <input type="submit" name="submit" value="Login"><p><b>Not a user ?</b> <a href = "register.html">Register here</a></p>
+      <!-- <p><a href = "e_mail (1).php">Forgot Password ?</a><p> -->
+    </form>
 
 
   </body>

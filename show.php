@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Money Tracking Dropdown Using jQuery Ajax</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<form method = "post" action = "show1.php">
+<form method = "post" action = "DisplayDataBackend.php">
   <table>
     <tr height = "100">
         <td><button type="button" name = "button" id="sdate">Show_By_Date</button></td>
@@ -36,7 +36,7 @@
        $("#sdate").on("click", function(){
         $.ajax({    //create an ajax request to display.php
         type: "GET",
-        url: "show2.php",             
+        url: "CatchData.php",             
         dataType: "html",   //expect html to be returned                
         success: function(response){                    
             $("#responsecontainer").html(response); 
@@ -59,7 +59,7 @@
        $("#smonth").on("click", function(){
         $.ajax({    //create an ajax request to display.php
         type: "GET",
-        url: "show2.php",             
+        url: "CatchData.php",             
         dataType: "html",   //expect html to be returned                
         success: function(response){                    
             $("#responsecontainer1").html(response); 

@@ -21,7 +21,7 @@ try {
 
     //Recipients
     $mail->setFrom('bonishgarg@gmail.com', 'Bonish Agarwal');
-    $mail->addAddress($email, 'Bonish Agarwal');     // Add a recipient
+    $mail->addAddress($_SESSION["email"], 'Bonish Agarwal');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     $mail->addReplyTo('bonishgarg@gmail.com', 'Bonish Agarwal');
     // $mail->addCC('cc@example.com');

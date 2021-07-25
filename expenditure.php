@@ -12,7 +12,7 @@
             var selectedcategory = $(".money option:selected").val();    
             $.ajax({  
                 type: "POST",    
-                url: "exp.php",    
+                url: "expDataLabels.php",    
                 data: { categoryData : selectedcategory }   
             }).done(function(data){
                 $("#response").html(data);   
@@ -22,7 +22,7 @@
 </script>
     
     
-<form method  ="post" action = "a.php">
+<form method  ="post" action = "addCategoryBackend.php">
     <table>
         <tr>
             <td>
